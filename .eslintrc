@@ -1,0 +1,28 @@
+{
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "import/extensions": 0
+  },
+  "overrides": [
+    {
+      "files": ["index.js"],
+      "rules": {
+        "import/prefer-default-export": 0
+      }
+    },
+    {
+      "files": ["test/**/*.js"],
+      "env": {
+        "mocha": true
+      },
+      "rules": {
+        "no-unused-expressions": 0,
+        "import/prefer-default-export": 0
+      }
+    }
+  ]
+}
