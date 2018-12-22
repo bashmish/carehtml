@@ -1,0 +1,41 @@
+{
+  "name": "carehtml",
+  "version": "0.1.0",
+  "description": "Templates with automatic registration of Custom Elements.",
+  "license": "MIT",
+  "author": "Mikhail Bashkirov <bashmish@gmail.com>",
+  "repository": "github:bashmish/carehtml",
+  "homepage": "https://github.com/bashmish/carehtml#readme",
+  "main": "src/wrap.js",
+  "devDependencies": {
+    "@polymer/lit-element": "^0.6.5",
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
+    "eclint": "^2.8.1",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "htm": "^2.0.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^4.0.0-rc.2",
+    "lit-html": "^1.0.0-rc.1",
+    "mocha": "^5.2.0",
+    "preact": "^8.4.2",
+    "wallaby-webpack": "^3.9.13",
+    "webpack": "^4.28.1"
+  },
+  "scripts": {
+    "lint": "npm run lint:ec && npm run lint:es",
+    "lint:ec": "eclint check $(git ls-files)",
+    "lint:es": "eslint '**/*.js'",
+    "test": "karma start",
+    "test:debug": "karma start --no-single-run"
+  }
+}

@@ -1,0 +1,5 @@
+/test/
+.editorconfig
+.eslintrc
+karma.conf.js
+wallaby.js
