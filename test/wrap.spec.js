@@ -41,7 +41,7 @@ describe('wrap', () => {
 
     const html = wrap(htm.bind(h));
 
-    const PreactButton = props => html`<button ...${props}>${props.children}</button>`;
+    const PreactButton = (props) => html`<button ...${props}>${props.children}</button>`;
 
     class CustomHello extends HTMLElement {
       constructor() {
