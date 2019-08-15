@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@bundled-es-modules/chai';
 import wrap from '../src/wrap.js';
 
 describe('wrap', () => {

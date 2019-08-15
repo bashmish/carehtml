@@ -5,6 +5,15 @@
     "browser": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "test/**/*.js",
+          "*.conf.js",
+        ],
+      },
+    ],
     "import/extensions": 0
   },
   "overrides": [
