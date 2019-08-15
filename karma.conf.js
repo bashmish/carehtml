@@ -7,6 +7,7 @@ module.exports = (config) => {
   config.browsers = [
     'ChromeHeadless',
     'FirefoxHeadless',
+    'Safari',
   ];
   config.files = [
     // can be overwritten by passing a --grep flag. examples:
