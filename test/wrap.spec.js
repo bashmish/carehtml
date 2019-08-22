@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@bundled-es-modules/chai';
 import wrap from '../src/wrap.js';
 
 describe('wrap', () => {
@@ -41,7 +41,7 @@ describe('wrap', () => {
 
     const html = wrap(htm.bind(h));
 
-    const PreactButton = props => html`<button ...${props}>${props.children}</button>`;
+    const PreactButton = (props) => html`<button ...${props}>${props.children}</button>`;
 
     class CustomHello extends HTMLElement {
       constructor() {

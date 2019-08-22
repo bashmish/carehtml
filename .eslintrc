@@ -5,6 +5,15 @@
     "browser": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "test/**/*.js",
+          "*.conf.js",
+        ],
+      },
+    ],
     "import/extensions": 0
   },
   "overrides": [
@@ -20,6 +29,7 @@
         "mocha": true
       },
       "rules": {
+        "max-classes-per-file": 0,
         "no-unused-expressions": 0,
         "import/prefer-default-export": 0
       }

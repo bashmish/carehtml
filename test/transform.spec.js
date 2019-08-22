@@ -1,8 +1,8 @@
-import { expect } from 'chai';
+import { expect } from '@bundled-es-modules/chai';
 import transform from '../src/transform.js';
 
 const testhtml = (strings, ...values) => [strings, values];
-const getNameForCEClass = klass => transform(['', ''], [klass])[0][0];
+const getNameForCEClass = (klass) => transform(['', ''], [klass])[0][0];
 
 describe('transform', () => {
   it('registers names for Custom Element classes in values and concatenates strings with those names', () => {
