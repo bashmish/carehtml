@@ -1,5 +1,9 @@
+/coverage/
 /test/
+.browserslistrc
 .editorconfig
 .eslintrc
 karma.conf.js
+karma.bs.conf.js
 wallaby.js
+*.log
