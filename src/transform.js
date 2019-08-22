@@ -29,7 +29,7 @@ function getClassUniqueTag(klass) {
     return tag;
   }
 
-  if (Object.prototype.hasOwnProperty.call(klass, 'name')) {
+  if (Object.prototype.hasOwnProperty.call(klass, 'name') && klass.name) {
     tag = toDashCase(klass.name);
     if (tag.indexOf('-') === -1) {
       tag = `c-${tag}`;
