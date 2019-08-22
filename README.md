@@ -110,3 +110,9 @@ function fixture(litTemplate) {
   return wrapper.children[0];
 }
 ```
+
+## Special Thanks
+
+[![BrowserStack](./docs/browserstack-logo.svg)](https://www.browserstack.com)
+
+For their awesome cross-browser testing automation solution!
