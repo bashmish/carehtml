@@ -1,4 +1,7 @@
 const registeredElements = new Map();
+const cache1 = [];
+const cache2 = new Map();
+const CACHE2_SEPARATOR = '$$carehtml_separator$$';
 
 function toDashCase(name) {
   const dashCaseLetters = [];
@@ -75,5 +78,19 @@ export default function transform(strings, values) {
     newStrings.push(strings[strings.length - 1]);
   }
   result[0] = newStrings;
+
+  if (cache1.indexOf(strings) !== -1) {
+    const cache2key = newStrings.join(CACHE2_SEPARATOR);
+    const cachedStrings = cache2.get(cache2key);
+    if (cachedStrings) {
+      result[0] = cachedStrings;
+    } else {
+      cache2.set(cache2key, newStrings);
+    }
+  } else {
+    cache1.push(strings);
+    cache2.set(newStrings.join(CACHE2_SEPARATOR), newStrings);
+  }
+
   return result;
 }

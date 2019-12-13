@@ -131,54 +131,54 @@ Test configuration:
 
 First numbers show the difference in creating a template between using `lit-html` directly, doing same via `carehtml` wrapper, and most importantly, using Custom Element classes in place of tag names.
 
-| create template for lit-html            |      ops/sec |
-| --------------------------------------- | -----------: |
-| Chrome 79.0.3945                        |              |
-| clean html\`\<el-name>\</el-name>\`     |  `149575145` |
-| care(html)\`\<el-name>\</el-name>\`     |   `30728712` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `4654638` |
-| Firefox 71.0.0                          |              |
-| clean html\`\<el-name>\</el-name>\`     | `1268411403` |
-| care(html)\`\<el-name>\</el-name>\`     |    `7112878` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `1551298` |
-| Safari 13.0.3                           |              |
-| clean html\`\<el-name>\</el-name>\`     |   `29071424` |
-| care(html)\`\<el-name>\</el-name>\`     |    `7572036` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `1800394` |
+| create template for lit-html            | without cache (ops/sec) | with cache (ops/sec) |  diff |
+| --------------------------------------- | ----------------------: | -------------------: | ----: |
+| Chrome 79.0.3945                        |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |             `149575145` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |              `30728712` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |               `4654638` |            `1343314` | x0.29 |
+| Firefox 71.0.0                          |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |            `1268411403` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |               `7112878` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |               `1551298` |             `982065` | x0.63 |
+| Safari 13.0.3                           |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |              `29071424` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |               `7572036` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |               `1800394` |            `1139581` | x0.63 |
 
 Next numbers show the rendering times of those from above.
 
-| render template for lit-html            |    ops/sec |
-| --------------------------------------- | ---------: |
-| Chrome 79.0.3945                        |            |
-| clean html\`\<el-name>\</el-name>\`     | `20270378` |
-| care(html)\`\<el-name>\</el-name>\`     | `20915893` |
-| care(html)\`<${ElClass}></${ElClass}>\` | `20682304` |
-| Firefox 71.0.0                          |            |
-| clean html\`\<el-name>\</el-name>\`     |  `3252965` |
-| care(html)\`\<el-name>\</el-name>\`     |  `3418368` |
-| care(html)\`<${ElClass}></${ElClass}>\` |  `3228236` |
-| Safari 13.0.3                           |            |
-| clean html\`\<el-name>\</el-name>\`     | `10930284` |
-| care(html)\`\<el-name>\</el-name>\`     | `10873434` |
-| care(html)\`<${ElClass}></${ElClass}>\` | `10822978` |
+| render template for lit-html            | without cache (ops/sec) | with cache (ops/sec) | diff |
+| --------------------------------------- | ----------------------: | -------------------: | ---: |
+| Chrome 79.0.3945                        |                         |                      |      |
+| clean html\`\<el-name>\</el-name>\`     |              `20270378` |                      |      |
+| care(html)\`\<el-name>\</el-name>\`     |              `20915893` |                      |      |
+| care(html)\`<${ElClass}></${ElClass}>\` |              `20682304` |           `22036696` |  ~x0 |
+| Firefox 71.0.0                          |                         |                      |      |
+| clean html\`\<el-name>\</el-name>\`     |               `3252965` |                      |      |
+| care(html)\`\<el-name>\</el-name>\`     |               `3418368` |                      |      |
+| care(html)\`<${ElClass}></${ElClass}>\` |               `3228236` |            `3310977` |  ~x0 |
+| Safari 13.0.3                           |                         |                      |      |
+| clean html\`\<el-name>\</el-name>\`     |              `10930284` |                      |      |
+| care(html)\`\<el-name>\</el-name>\`     |              `10873434` |                      |      |
+| care(html)\`<${ElClass}></${ElClass}>\` |              `10822978` |            `9544333` |  ~x0 |
 
 Next numbers show the combination of both.
 
-| create and render template for lit-html |    ops/sec |
-| --------------------------------------- | ---------: |
-| Chrome 79.0.3945                        |            |
-| clean html\`\<el-name>\</el-name>\`     | `13208368` |
-| care(html)\`\<el-name>\</el-name>\`     |  `8984663` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `559925` |
-| Firefox 71.0.0                          |            |
-| clean html\`\<el-name>\</el-name>\`     |  `3237455` |
-| care(html)\`\<el-name>\</el-name>\`     |  `2107983` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `279335` |
-| Safari 13.0.3                           |            |
-| clean html\`\<el-name>\</el-name>\`     |  `8824180` |
-| care(html)\`\<el-name>\</el-name>\`     |  `5019988` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `777846` |
+| create and render template for lit-html | without cache (ops/sec) | with cache (ops/sec) |  diff |
+| --------------------------------------- | ----------------------: | -------------------: | ----: |
+| Chrome 79.0.3945                        |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |              `13208368` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |               `8984663` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |                `559925` |             `861831` | x1.54 |
+| Firefox 71.0.0                          |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |               `3237455` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |               `2107983` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |                `279335` |             `584330` | x2.09 |
+| Safari 13.0.3                           |                         |                      |       |
+| clean html\`\<el-name>\</el-name>\`     |               `8824180` |                      |       |
+| care(html)\`\<el-name>\</el-name>\`     |               `5019988` |                      |       |
+| care(html)\`<${ElClass}></${ElClass}>\` |                `777846` |             `838853` |   ~x0 |
 
 ## Special Thanks
 
