@@ -11,6 +11,7 @@
     "@bundled-es-modules/chai": "^4.2.2",
     "@open-wc/testing-karma": "^3.1.18",
     "babel-eslint": "^10.0.3",
+    "benchmark": "^2.1.4",
     "browserslist": "^4.8.2",
     "chai": "^4.2.0",
     "eclint": "^2.8.1",
@@ -20,6 +21,9 @@
     "htm": "^2.2.1",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^4.4.1",
+    "karma-benchmark": "^1.0.4",
+    "karma-benchmark-json-reporter": "^1.0.1",
+    "karma-benchmarkjs-reporter": "^1.0.0",
     "karma-browserstack-browserslist-launchers": "^0.1.0",
     "karma-browserstack-launcher": "^1.5.1",
     "karma-chrome-launcher": "^3.1.0",
@@ -39,6 +43,8 @@
     "webpack": "^4.41.2"
   },
   "scripts": {
+    "bench": "karma start karma.bench.conf.js",
+    "bench:debug": "karma start karma.bench.conf.js --no-single-run",
     "lint": "npm run lint:ec && npm run lint:es",
     "lint:ec": "eclint check $(git ls-files)",
     "lint:es": "eslint '**/*.js'",
