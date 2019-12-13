@@ -9,10 +9,11 @@
       "error",
       {
         "devDependencies": [
+          "bench/**/*.js",
           "test/**/*.js",
-          "*.conf.js",
-        ],
-      },
+          "*.conf.js"
+        ]
+      }
     ],
     "import/extensions": 0
   },
@@ -21,6 +22,18 @@
       "files": ["index.js"],
       "rules": {
         "import/prefer-default-export": 0
+      }
+    },
+    {
+      "files": ["bench/**/*.js"],
+      "globals": {
+        "suite": true,
+        "benchmark": true
+      },
+      "rules": {
+        "max-classes-per-file": 0,
+        "no-unused-expressions": 0,
+        "func-names": 0
       }
     },
     {
