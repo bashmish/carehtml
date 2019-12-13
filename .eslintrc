@@ -10,9 +10,9 @@
       {
         "devDependencies": [
           "test/**/*.js",
-          "*.conf.js",
-        ],
-      },
+          "*.conf.js"
+        ]
+      }
     ],
     "import/extensions": 0
   },
