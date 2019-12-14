@@ -1,30 +1,36 @@
+import { fromCache, toCache } from './cache.js';
+
 const registeredElements = new Map();
 
-function toDashCase(name) {
+const toDashCase = (name) => {
   const dashCaseLetters = [];
-  for (let i = 0; i < name.length; i += 1) {
-    const letter = name[i];
+
+  for (let i = 0, letter = name[0]; i < name.length; i += 1, letter = name[i]) {
     const letterLowerCase = letter.toLowerCase();
+
     if (letter !== letterLowerCase && i !== 0) {
       dashCaseLetters.push('-');
     }
+
     dashCaseLetters.push(letterLowerCase);
   }
-  return dashCaseLetters.join('');
-}
 
-function incrementTagName(tag, counter, start = 1) {
+  return dashCaseLetters.join('');
+};
+
+const incrementTagName = (tag, counter, start = 1) => {
   const newName = counter === start ? tag : `${tag}-${counter}`;
   const elementRegistered = !!customElements.get(newName);
+
   if (elementRegistered) {
     return incrementTagName(tag, counter + 1, start);
   }
+
   return newName;
-}
+};
 
-function getClassUniqueTag(klass) {
+const getClassUniqueTag = (klass) => {
   let tag = registeredElements.get(klass);
-
   if (tag) {
     return tag;
   }
@@ -43,37 +49,34 @@ function getClassUniqueTag(klass) {
   registeredElements.set(klass, tag);
 
   return tag;
-}
+};
 
-export default function transform(strings, values) {
-  if (values.length === 0) {
-    return [strings];
-  }
-  const newStrings = [];
-  const result = [0]; // first index is reserved for strings
-  let mergeWithLastString = false;
+const isCustomElement = (element) => element.prototype instanceof HTMLElement;
+
+const process = (strings, values) => {
+  const keys = [];
+  const indexes = [];
+  const newValues = [];
+  const newStrings = [strings[0]];
+
   values.forEach((value, index) => {
-    const string = strings[index];
-    if (value.prototype instanceof HTMLElement) {
-      const tag = getClassUniqueTag(value);
-      if (mergeWithLastString) {
-        const lastString = newStrings[newStrings.length - 1];
-        newStrings[newStrings.length - 1] = `${lastString}${tag}${strings[index + 1]}`;
-      } else {
-        newStrings.push(`${string}${tag}${strings[index + 1]}`);
-      }
-      mergeWithLastString = true;
+    if (isCustomElement(value)) {
+      keys.push([index, value]);
+      newStrings[newStrings.length - 1] += getClassUniqueTag(value) + strings[index + 1];
     } else {
-      if (!mergeWithLastString) {
-        newStrings.push(string);
-      }
-      result.push(value);
-      mergeWithLastString = false;
+      indexes.push(index);
+      newValues.push(value);
+      newStrings.push(strings[index + 1]);
     }
   });
-  if (!mergeWithLastString) {
-    newStrings.push(strings[strings.length - 1]);
-  }
-  result[0] = newStrings;
-  return result;
-}
+
+  toCache(strings, {
+    keys,
+    indexes,
+    strings: keys.length > 0 ? newStrings : strings,
+  });
+
+  return [newStrings, ...newValues];
+};
+
+export default (strings, values) => fromCache(strings, values) || process(strings, values);
