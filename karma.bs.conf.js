@@ -2,7 +2,7 @@
 
 const createBaseConfig = require('./karma.conf.js');
 
-module.exports = (config) => {
+module.exports = config => {
   config.set(createBaseConfig(config));
   config.browserStack = {
     username: process.env.BROWSERSTACK_USERNAME,

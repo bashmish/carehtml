@@ -2,11 +2,9 @@
 
 const createBaseConfig = require('./karma.conf.js');
 
-module.exports = (config) => {
+module.exports = config => {
   config.set(createBaseConfig(config));
-  config.files = [
-    { pattern: 'bench/**/*.bench.js', type: 'module' },
-  ];
+  config.files = [{ pattern: 'bench/**/*.bench.js', type: 'module' }];
   config.frameworks = ['esm', 'source-map-support', 'detectBrowsers', 'benchmark'];
   config.reporters = ['benchmark', 'benchmark-json'];
   config.benchmarkReporter = {

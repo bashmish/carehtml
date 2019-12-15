@@ -11,6 +11,7 @@ Inspired by [JSX](https://reactjs.org/docs/introducing-jsx.html) in general and 
 ## Motivation
 
 There are 2 main reasons Web Components need something like this:
+
 1. Lack of scoping when registering Custom Elements which creates issues in tests and makes it impossible to have 2 different components with the same name.
 2. Inability to have 2 different versions of the same Custom Element when refactoring from an old to a new version, especially when having nested node modules.
 
@@ -38,7 +39,7 @@ class MySearchBar extends LitElement {
 ```
 
 > Wrapping the lit-html function is extra work which might seem unnecessary in the user code, but that allows to decouple `carehtml` from `lit-html`, primarily in terms of npm dependencies.
-This allows to use `carehtml` with any version of `lit-html` and develop `carehtml` with its independent release cycle.
+> This allows to use `carehtml` with any version of `lit-html` and develop `carehtml` with its independent release cycle.
 
 ## Usage with Other Templating Libraries Based on Tagged Templates
 
@@ -65,9 +66,11 @@ class App extends Component {
       <div class="app">
         <${Header} name="ToDo's (${page})" />
         <ul>
-          ${todos.map(todo => html`
-            <li>${todo}</li>
-          `)}
+          ${todos.map(
+            todo => html`
+              <li>${todo}</li>
+            `,
+          )}
         </ul>
         <${Button} onClick=${this.addTodo.bind(this)}>Add Todo</${Button}>
         <${Footer}>footer content here<//>
@@ -76,7 +79,12 @@ class App extends Component {
   }
 }
 
-render(html`<${App} page="All" />`, document.body);
+render(
+  html`
+    <${App} page="All" />
+  `,
+  document.body,
+);
 ```
 
 ## Usage in Tests
@@ -117,6 +125,7 @@ Runtime performance is not the key requirement for `carehtml` since the end goal
 But some numbers might be interesting to show the impact of such solution on local development and the potential runtime usage in production for projects that want to stay compilation-free.
 
 Test configuration:
+
 - MacBook Pro (15-inch, 2016)
 - Mac OS X 10.14.6
 
