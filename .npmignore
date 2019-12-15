@@ -1,8 +1,10 @@
+/bench/
 /coverage/
 /test/
 .browserslistrc
 .editorconfig
 .eslintrc
+karma.bench.conf.js
 karma.bs.conf.js
 karma.conf.js
 results.json
