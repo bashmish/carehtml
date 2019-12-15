@@ -2,6 +2,7 @@
 /coverage/
 /test/
 .browserslistrc
+.commitlintrc
 .editorconfig
 .eslintrc
 .huskyrc
