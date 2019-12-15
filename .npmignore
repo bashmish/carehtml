@@ -4,6 +4,8 @@
 .browserslistrc
 .editorconfig
 .eslintrc
+.huskyrc
+.lintstagedrc
 .prettierignore
 .prettierrc
 karma.bench.conf.js
