@@ -3,8 +3,8 @@
 .browserslistrc
 .editorconfig
 .eslintrc
-karma.conf.js
 karma.bs.conf.js
+karma.conf.js
 results.json
 wallaby.js
 *.log
