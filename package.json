@@ -45,9 +45,9 @@
   "scripts": {
     "bench": "karma start karma.bench.conf.js",
     "bench:debug": "karma start karma.bench.conf.js --no-single-run",
-    "lint": "yarn lint:ec && yarn lint:es",
-    "lint:ec": "eclint check $(git ls-files)",
-    "lint:es": "eslint '**/*.js'",
+    "lint": "yarn lint:eclint && yarn lint:eslint",
+    "lint:eclint": "eclint check $(git ls-files)",
+    "lint:eslint": "eslint '**/*.js'",
     "test": "karma start --coverage",
     "test:debug": "karma start --no-single-run",
     "test:legacy": "karma start --compatibility all --coverage",
