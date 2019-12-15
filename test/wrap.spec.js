@@ -5,7 +5,10 @@ describe('wrap', () => {
   it('passes strings and values as tagged templates expect', () => {
     let calledCount = 0;
     let calledArgs;
-    const html = wrap((...args) => { calledCount += 1; calledArgs = args; });
+    const html = wrap((...args) => {
+      calledCount += 1;
+      calledArgs = args;
+    });
     class MyLily extends HTMLElement {}
 
     html`<${MyLily} id="${'my-id'}">${'my text'}</${MyLily}>`;
@@ -41,7 +44,10 @@ describe('wrap', () => {
 
     const html = wrap(htm.bind(h));
 
-    const PreactButton = (props) => html`<button ...${props}>${props.children}</button>`;
+    const PreactButton = props =>
+      html`
+        <button ...${props}>${props.children}</button>
+      `;
 
     class CustomHello extends HTMLElement {
       constructor() {
@@ -50,7 +56,9 @@ describe('wrap', () => {
         this.shadowRoot.innerHTML = this.render();
       }
 
-      static get observedAttributes() { return ['name']; }
+      static get observedAttributes() {
+        return ['name'];
+      }
 
       attributeChangedCallback() {
         this.shadowRoot.innerHTML = this.render();
@@ -83,7 +91,12 @@ describe('wrap', () => {
     const fixture = document.createElement('div');
     document.body.appendChild(fixture);
 
-    render(html`<${PreactApp} />`, fixture);
+    render(
+      html`
+        <${PreactApp} />
+      `,
+      fixture,
+    );
 
     expect(fixture.children.length).to.equal(1);
 

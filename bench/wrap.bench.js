@@ -29,88 +29,112 @@ suite('create template for lit-html', () => {
 });
 
 suite('render template for lit-html', () => {
-  benchmark('clean html`<el-name></el-name>`', function () {
-    render(this.template, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
-      this.template = litHtml`<defined-element></defined-element>`;
+  benchmark(
+    'clean html`<el-name></el-name>`',
+    function() {
+      render(this.template, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+        this.template = litHtml`<defined-element></defined-element>`;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 
-  benchmark('care(html)`<el-name></el-name>`', function () {
-    render(this.template, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
-      this.template = careHtml`<defined-element></defined-element>`;
+  benchmark(
+    'care(html)`<el-name></el-name>`',
+    function() {
+      render(this.template, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+        this.template = careHtml`<defined-element></defined-element>`;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 
-  // eslint-disable-next-line no-template-curly-in-string
-  benchmark('care(html)`<${ElClass}></${ElClass}>`', function () {
-    render(this.template, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
-      this.template = careHtml`<${StaticClass}></${StaticClass}>`;
+  benchmark(
+    // eslint-disable-next-line no-template-curly-in-string
+    'care(html)`<${ElClass}></${ElClass}>`',
+    function() {
+      render(this.template, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+        this.template = careHtml`<${StaticClass}></${StaticClass}>`;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 });
 
 suite('create and render template for lit-html', () => {
-  benchmark('clean html`<el-name></el-name>`', function () {
-    render(litHtml`<defined-element></defined-element>`, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
+  benchmark(
+    'clean html`<el-name></el-name>`',
+    function() {
+      render(litHtml`<defined-element></defined-element>`, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 
-  benchmark('care(html)`<el-name></el-name>`', function () {
-    render(careHtml`<defined-element></defined-element>`, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
+  benchmark(
+    'care(html)`<el-name></el-name>`',
+    function() {
+      render(careHtml`<defined-element></defined-element>`, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 
-  // eslint-disable-next-line no-template-curly-in-string
-  benchmark('care(html)`<${ElClass}></${ElClass}>`', function () {
-    render(careHtml`<${StaticClass}></${StaticClass}>`, this.wrapper);
-  }, {
-    setup() {
-      const div = document.createElement('div');
-      document.body.appendChild(div);
-      this.wrapper = div;
+  benchmark(
+    // eslint-disable-next-line no-template-curly-in-string
+    'care(html)`<${ElClass}></${ElClass}>`',
+    function() {
+      render(careHtml`<${StaticClass}></${StaticClass}>`, this.wrapper);
     },
-    teardown() {
-      document.body.removeChild(this.wrapper);
+    {
+      setup() {
+        const div = document.createElement('div');
+        document.body.appendChild(div);
+        this.wrapper = div;
+      },
+      teardown() {
+        document.body.removeChild(this.wrapper);
+      },
     },
-  });
+  );
 });
