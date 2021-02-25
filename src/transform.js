@@ -54,7 +54,7 @@ export default function transform(strings, values) {
   let mergeWithLastString = false;
   values.forEach((value, index) => {
     const string = strings[index];
-    if (value.prototype instanceof HTMLElement) {
+    if (value && value.prototype instanceof HTMLElement) {
       const tag = getClassUniqueTag(value);
       if (mergeWithLastString) {
         const lastString = newStrings[newStrings.length - 1];
