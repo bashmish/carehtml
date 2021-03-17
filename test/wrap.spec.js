@@ -11,10 +11,9 @@ describe('wrap', () => {
     });
     class MyLily extends HTMLElement {}
 
-    html`<${MyLily} id="${'my-id'}" style=${null}>${'my text'}</${MyLily}>`;
-    console.warn(calledArgs);
+    html`<${MyLily} id="${'my-id'}">${'my text'}</${MyLily}>`;
     expect(calledCount).to.equal(1);
-    expect(calledArgs).to.deep.equal([['<my-lily id="', '" style=', '>', '</my-lily>'], 'my-id', null, 'my text']);
+    expect(calledArgs).to.deep.equal([['<my-lily id="', '">', '</my-lily>'], 'my-id', 'my text']);
   });
 
   it('integrates with lit-html', async () => {
