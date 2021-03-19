@@ -13,6 +13,14 @@ describe('transform', () => {
     expect(customElements.get('my-tulip')).to.equal(MyTulip);
   });
 
+  it('does not throw on nullish values', () => {
+    class MyHops extends HTMLElement {}
+    expect(transform(...testhtml`<${MyHops} attribute=${null}></${MyHops}>`)).to.not.throw;
+    expect(transform(...testhtml`<${MyHops} attribute=${undefined}></${MyHops}>`)).to.not.throw;
+    expect(transform(...testhtml`<${MyHops}>${null}</${MyHops}>`)).to.not.throw;
+    expect(transform(...testhtml`<${MyHops}>${undefined}</${MyHops}>`)).to.not.throw;
+  });
+
   describe('concatenation', () => {
     it('concatenates element names with no other expressions', () => {
       class MyViolet extends HTMLElement {}
