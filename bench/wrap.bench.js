@@ -31,7 +31,7 @@ suite('create template for lit-html', () => {
 suite('render template for lit-html', () => {
   benchmark(
     'clean html`<el-name></el-name>`',
-    function() {
+    function () {
       render(this.template, this.wrapper);
     },
     {
@@ -49,7 +49,7 @@ suite('render template for lit-html', () => {
 
   benchmark(
     'care(html)`<el-name></el-name>`',
-    function() {
+    function () {
       render(this.template, this.wrapper);
     },
     {
@@ -68,7 +68,7 @@ suite('render template for lit-html', () => {
   benchmark(
     // eslint-disable-next-line no-template-curly-in-string
     'care(html)`<${ElClass}></${ElClass}>`',
-    function() {
+    function () {
       render(this.template, this.wrapper);
     },
     {
@@ -88,7 +88,7 @@ suite('render template for lit-html', () => {
 suite('create and render template for lit-html', () => {
   benchmark(
     'clean html`<el-name></el-name>`',
-    function() {
+    function () {
       render(litHtml`<defined-element></defined-element>`, this.wrapper);
     },
     {
@@ -105,7 +105,7 @@ suite('create and render template for lit-html', () => {
 
   benchmark(
     'care(html)`<el-name></el-name>`',
-    function() {
+    function () {
       render(careHtml`<defined-element></defined-element>`, this.wrapper);
     },
     {
@@ -123,7 +123,7 @@ suite('create and render template for lit-html', () => {
   benchmark(
     // eslint-disable-next-line no-template-curly-in-string
     'care(html)`<${ElClass}></${ElClass}>`',
-    function() {
+    function () {
       render(careHtml`<${StaticClass}></${StaticClass}>`, this.wrapper);
     },
     {
