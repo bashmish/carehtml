@@ -1,5 +1,5 @@
 import { expect } from '@bundled-es-modules/chai';
-import transform from '../src/transform.js';
+import transform from './transform.js';
 
 const testhtml = (strings, ...values) => [strings, values];
 const getNameForCEClass = (klass) => transform(['', ''], [klass])[0][0];

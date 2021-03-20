@@ -1,5 +1,5 @@
 import { expect } from '@bundled-es-modules/chai';
-import wrap from '../src/wrap.js';
+import wrap from './wrap.js';
 
 describe('wrap', () => {
   it('passes strings and values as tagged templates expect', () => {

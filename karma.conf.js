@@ -8,9 +8,9 @@ module.exports = (config) => {
   config.files = [
     // can be overwritten by passing a --grep flag. examples:
     //
-    // yarn test -- --grep test/foo/bar.test.js
-    // yarn test -- --grep test/bar/*
-    { pattern: config.grep ? config.grep : 'test/**/*.spec.js', type: 'module' },
+    // yarn test -- --grep src/foo/bar.spec.js
+    // yarn test -- --grep src/bar/*.spec.js
+    { pattern: config.grep ? config.grep : 'src/**/*.spec.js', type: 'module' },
   ];
   config.frameworks = [...config.frameworks, 'detectBrowsers'];
   config.esm.nodeResolve = true;
