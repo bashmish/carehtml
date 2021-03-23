@@ -1,7 +1,7 @@
 /.vscode/
-/bench/
 /coverage/
-/test/
+*.bench.js
+*.spec.js
 .browserslistrc
 .commitlintrc
 .editorconfig

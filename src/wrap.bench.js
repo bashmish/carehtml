@@ -1,5 +1,5 @@
 import { html as litHtml, render } from 'lit-html';
-import wrap from '../src/wrap.js';
+import wrap from './wrap.js';
 
 class DefinedElement extends HTMLElement {}
 window.customElements.define('defined-element', DefinedElement);

@@ -5,7 +5,7 @@ const wallabyPostprocessor = wallabyWebpack();
 
 module.exports = {
   files: [{ pattern: 'src/**/*.js', load: false }],
-  tests: [{ pattern: 'test/**/*.spec.js', load: false }],
+  tests: [{ pattern: 'src/**/*.spec.js', load: false }],
   testFramework: 'mocha',
   env: {
     kind: 'chrome',
