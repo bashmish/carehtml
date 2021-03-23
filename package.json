@@ -45,7 +45,7 @@
     "lit-html": "^1.1.2",
     "mocha": "^6.2.2",
     "preact": "^10.1.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.2.1",
     "wallaby-webpack": "^3.9.15",
     "webpack": "^4.41.2"
   },

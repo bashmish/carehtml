@@ -66,11 +66,7 @@ class App extends Component {
       <div class="app">
         <${Header} name="ToDo's (${page})" />
         <ul>
-          ${todos.map(
-            todo => html`
-              <li>${todo}</li>
-            `,
-          )}
+          ${todos.map((todo) => html`<li>${todo}</li>`)}
         </ul>
         <${Button} onClick=${this.addTodo.bind(this)}>Add Todo</${Button}>
         <${Footer}>footer content here<//>
@@ -79,12 +75,7 @@ class App extends Component {
   }
 }
 
-render(
-  html`
-    <${App} page="All" />
-  `,
-  document.body,
-);
+render(html`<${App} page="All" />`, document.body);
 ```
 
 ## Usage in Tests

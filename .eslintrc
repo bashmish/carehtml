@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "airbnb-base",
-    "prettier"
-  ],
+  "extends": ["airbnb-base", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true
@@ -11,11 +8,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "bench/**/*.js",
-          "test/**/*.js",
-          "*.conf.js"
-        ]
+        "devDependencies": ["bench/**/*.js", "test/**/*.js", "*.conf.js"]
       }
     ],
     "import/extensions": 0

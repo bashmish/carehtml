@@ -2,7 +2,7 @@
 
 const { createDefaultConfig } = require('@open-wc/testing-karma');
 
-module.exports = config => {
+module.exports = (config) => {
   config.set(createDefaultConfig(config));
   config.browsers = [];
   config.files = [
