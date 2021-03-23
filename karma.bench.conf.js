@@ -1,12 +1,18 @@
 /* eslint-disable no-param-reassign */
 
-const createBaseConfig = require('./karma.conf.js');
+const { createDefaultConfig } = require('@open-wc/testing-karma');
 
 module.exports = (config) => {
-  config.set(createBaseConfig(config));
+  config.set(createDefaultConfig(config));
+  config.browsers = [];
   config.files = [{ pattern: 'src/**/*.bench.js', type: 'module' }];
-  config.frameworks = ['esm', 'source-map-support', 'detectBrowsers', 'benchmark'];
+  config.frameworks = ['esm', 'detectBrowsers', 'benchmark'];
   config.reporters = ['benchmark', 'benchmark-json'];
+  config.esm.nodeResolve = true;
+  config.detectBrowsers = {
+    usePhantomJS: false,
+    preferHeadless: true,
+  };
   config.benchmarkReporter = {
     terminalWidth: 140,
     browserWidth: 50,

@@ -11,8 +11,8 @@
 .prettierignore
 .prettierrc
 karma.bench.conf.js
-karma.bs.conf.js
-karma.conf.js
 results.json
 wallaby.js
+web-test-runner.bs.config.mjs
+web-test-runner.config.mjs
 *.log

@@ -134,19 +134,20 @@ describe('transform', () => {
     });
 
     it('fallbacks to a name "c-%index%" if constructor has no name', () => {
+      const createAnonymousCEClass = () => eval('(() => class extends HTMLElement {})()'); // eslint-disable-line no-eval
       const name1 = (() => {
-        const MyOrchid = (() => class extends HTMLElement {})();
+        const MyOrchid = createAnonymousCEClass();
         return getNameForCEClass(MyOrchid);
       })();
       const name2 = (() => {
-        const MyOrchid = (() => class extends HTMLElement {})();
+        const MyOrchid = createAnonymousCEClass();
         return getNameForCEClass(MyOrchid);
       })();
       expect(name1).to.equal('c-1');
       expect(name2).to.equal('c-2');
       customElements.define('c-3', class extends HTMLElement {});
       const name4 = (() => {
-        const MyOrchid = (() => class extends HTMLElement {})();
+        const MyOrchid = createAnonymousCEClass();
         return getNameForCEClass(MyOrchid);
       })();
       expect(name4).to.equal('c-4');
