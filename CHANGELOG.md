@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/bashmish/carehtml/compare/v0.1.2...v0.1.3) (2021-04-01)
+
+
+### Features
+
+* cache template to avoid rerendering when strings reference changes ([067b39d](https://github.com/bashmish/carehtml/commit/067b39d))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/bashmish/carehtml/compare/v0.1.1...v0.1.2) (2021-03-20)
 
