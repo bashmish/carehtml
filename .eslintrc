@@ -8,7 +8,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["src/**/*.bench.js", "src/**/*.spec.js", "*.conf.js", "*.config.mjs"]
+        "devDependencies": ["benchmarks/**/*.tachometer.js", "src/**/*.spec.js", "*.conf.js", "*.config.mjs"]
       }
     ],
     "import/extensions": 0
@@ -21,7 +21,7 @@
       }
     },
     {
-      "files": ["src/**/*.bench.js"],
+      "files": ["benchmarks/**/*.tachometer.js"],
       "globals": {
         "suite": true,
         "benchmark": true

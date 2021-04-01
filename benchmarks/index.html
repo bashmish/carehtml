@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<script type="module">
+  import { html as litHtml, render } from 'lit-html';
+  import wrap from '../src/wrap.js';
+
+  const queryParams = new URL(document.location).searchParams;
+
+  class DefinedElement extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      for (let i = 0; i < 100000; i++) {
+        const div = document.createElement('div');
+        div.innerText = 'text';
+        this.shadowRoot.appendChild(div);
+      }
+    }
+  }
+  window.customElements.define('defined-element', DefinedElement);
+
+  class UndefinedElement extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      for (let i = 0; i < 100000; i++) {
+        const div = document.createElement('div');
+        div.innerText = 'text';
+        this.shadowRoot.appendChild(div);
+      }
+    }
+  }
+
+  const careHtml = wrap(litHtml);
+
+  let getTemplate;
+
+  if (queryParams.has('direct')) {
+    getTemplate = () => litHtml`<defined-element></defined-element>`;
+  } else if (queryParams.has('wrapped')) {
+    getTemplate = () => careHtml`<defined-element></defined-element>`;
+  } else if (queryParams.has('wrapped-with-classes')) {
+    getTemplate = () => careHtml`<${UndefinedElement}></${UndefinedElement}>`;
+  }
+
+  performance.mark('create-and-render-twice-mark');
+
+  performance.mark('create-and-render-mark');
+  performance.mark('create-mark');
+  let template = getTemplate();
+  performance.measure('create', 'create-mark');
+  performance.mark('render-mark');
+  render(template, document.body);
+  performance.measure('render', 'render-mark');
+  performance.measure('create-and-render', 'create-and-render-mark');
+
+  performance.mark('recreate-and-rerender-mark');
+  performance.mark('recreate-mark');
+  template = getTemplate();
+  performance.measure('recreate', 'recreate-mark');
+  performance.mark('rerender-mark');
+  render(template, document.body);
+  performance.measure('rerender', 'rerender-mark');
+  performance.measure('recreate-and-rerender', 'recreate-and-rerender-mark');
+
+  performance.measure('create-and-render-twice', 'create-and-render-twice-mark');
+</script>

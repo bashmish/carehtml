@@ -29,13 +29,12 @@ describe('wrap', () => {
   });
 
   it('integrates with lit-html', async () => {
-    const { html: litHtml, TemplateResult, render } = await import('lit-html');
+    const { html: litHtml, render } = await import('lit-html');
 
     const html = wrap(litHtml);
     class MyAzalea extends HTMLElement {}
 
     const template = html`<${MyAzalea} id="${'my-id'}">${'my text'}</${MyAzalea}>`;
-    expect(template).to.be.instanceof(TemplateResult);
 
     const fixture = document.createElement('div');
     document.body.appendChild(fixture);
