@@ -115,61 +115,31 @@ function fixture(litTemplate) {
 Runtime performance is not the key requirement for `carehtml` since the end goal is to compile the code and have static and still unique tag names in the production code.
 But some numbers might be interesting to show the impact of such solution on local development and the potential runtime usage in production for projects that want to stay compilation-free.
 
-Test configuration:
+There are 2 things which `carehtml` can slow down and which can be measured: creating a template and rendering a template.
+Both can be measured together as well.
 
-- MacBook Pro (15-inch, 2016)
-- Mac OS X 10.14.6
+The original idea was that the benchmarks need to compare the most minimalistic template possible, e.g. `<my-element></my-element>` where `MyElement` does not render any internal template, otherwise the benchmarks will measure the DOM update caused by the internal template instead of the `carehtml` overhead.
+It turned out to be quite difficult to see the `carehtml` impact in such benchmarks, because it's insignificant as compared to even rendering such a minimalistic `<my-element></my-element>` template.
+You can play around with this by using `yarn bench:create-and-render:chrome` script and alike and modifying the `benchmarks/index.html` to your needs, e.g. by removing the constructors of the measured elements.
 
-First numbers show the difference in creating a template between using `lit-html` directly, doing same via `carehtml` wrapper, and most importantly, using Custom Element classes in place of tag names.
+The only thing that makes sense to measure in this situation is the rerendering.
+The idea is to check if it does not rerender unnecessarily second time when the classes stay the same meaning that the actual template is also the same.
+That's what makes `lit-html` so fast after all and `carehml` should not break this essential optimisation.
+In such benchmarks the `<my-element></my-element>` should have an internal template which will take most of the time of each render, so that the rerendering (if it happens) is close to being 2 times slower due to that internal template being rendered again.
+The end setup has `MyElement` with a shadow root with 100000 divs containing some text.
+The script `yarn bench:create-and-render-twice` can be used to measure that.
+The goal is to have the same numbers when using `lit-html` directly or wrapped with `carehtml`.
+And it's important to measure this with `lit-html 2.x` which does not have a special template string cache originally introduced for legacy browsers where string template literals were buggy.
 
-| create template for lit-html            |      ops/sec |
-| --------------------------------------- | -----------: |
-| Chrome 79.0.3945                        |              |
-| clean html\`\<el-name>\</el-name>\`     |  `149575145` |
-| care(html)\`\<el-name>\</el-name>\`     |   `30728712` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `4654638` |
-| Firefox 71.0.0                          |              |
-| clean html\`\<el-name>\</el-name>\`     | `1268411403` |
-| care(html)\`\<el-name>\</el-name>\`     |    `7112878` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `1551298` |
-| Safari 13.0.3                           |              |
-| clean html\`\<el-name>\</el-name>\`     |   `29071424` |
-| care(html)\`\<el-name>\</el-name>\`     |    `7572036` |
-| care(html)\`<${ElClass}></${ElClass}>\` |    `1800394` |
+These are the results for Chrome which clearly show no overhead on rerendering when wrapping with `carehtml`:
 
-Next numbers show the rendering times of those from above.
+| Benchmark            |            Avg time |                                vs direct |                               vs wrapped |                  vs wrapped with classes |
+| -------------------- | ------------------: | ---------------------------------------: | ---------------------------------------: | ---------------------------------------: |
+| direct               | 108.63ms - 112.34ms |                                        - | unsure<br>-1% - +3%<br>-1.57ms - +2.84ms | unsure<br>-2% - +2%<br>-2.42ms - +1.80ms |
+| wrapped              | 108.66ms - 111.05ms | unsure<br>-3% - +1%<br>-2.84ms - +1.57ms |                                        - | unsure<br>-2% - +1%<br>-2.51ms - +0.61ms |
+| wrapped with classes | 109.80ms - 111.80ms | unsure<br>-2% - +2%<br>-1.80ms - +2.42ms | unsure<br>-1% - +2%<br>-0.61ms - +2.51ms |                                        - |
 
-| render template for lit-html            |    ops/sec |
-| --------------------------------------- | ---------: |
-| Chrome 79.0.3945                        |            |
-| clean html\`\<el-name>\</el-name>\`     | `20270378` |
-| care(html)\`\<el-name>\</el-name>\`     | `20915893` |
-| care(html)\`<${ElClass}></${ElClass}>\` | `20682304` |
-| Firefox 71.0.0                          |            |
-| clean html\`\<el-name>\</el-name>\`     |  `3252965` |
-| care(html)\`\<el-name>\</el-name>\`     |  `3418368` |
-| care(html)\`<${ElClass}></${ElClass}>\` |  `3228236` |
-| Safari 13.0.3                           |            |
-| clean html\`\<el-name>\</el-name>\`     | `10930284` |
-| care(html)\`\<el-name>\</el-name>\`     | `10873434` |
-| care(html)\`<${ElClass}></${ElClass}>\` | `10822978` |
-
-Next numbers show the combination of both.
-
-| create and render template for lit-html |    ops/sec |
-| --------------------------------------- | ---------: |
-| Chrome 79.0.3945                        |            |
-| clean html\`\<el-name>\</el-name>\`     | `13208368` |
-| care(html)\`\<el-name>\</el-name>\`     |  `8984663` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `559925` |
-| Firefox 71.0.0                          |            |
-| clean html\`\<el-name>\</el-name>\`     |  `3237455` |
-| care(html)\`\<el-name>\</el-name>\`     |  `2107983` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `279335` |
-| Safari 13.0.3                           |            |
-| clean html\`\<el-name>\</el-name>\`     |  `8824180` |
-| care(html)\`\<el-name>\</el-name>\`     |  `5019988` |
-| care(html)\`<${ElClass}></${ElClass}>\` |   `777846` |
+Measurements in other browsers are similar.
 
 ## Special Thanks
 

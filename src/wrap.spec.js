@@ -16,14 +16,25 @@ describe('wrap', () => {
     expect(calledArgs).to.deep.equal([['<my-lily id="', '">', '</my-lily>'], 'my-id', 'my text']);
   });
 
+  it('returns same array reference for caching in html literal implementation', () => {
+    const calledArgs = [];
+    const html = wrap((...args) => {
+      calledArgs.push(args);
+    });
+    class MyZinnia extends HTMLElement {}
+    const render = () => html`<${MyZinnia} id="${'my-id'}">${'my text'}</${MyZinnia}>`;
+    render();
+    render();
+    expect(calledArgs[0][0]).to.equal(calledArgs[1][0]);
+  });
+
   it('integrates with lit-html', async () => {
-    const { html: litHtml, TemplateResult, render } = await import('lit-html');
+    const { html: litHtml, render } = await import('lit-html');
 
     const html = wrap(litHtml);
     class MyAzalea extends HTMLElement {}
 
     const template = html`<${MyAzalea} id="${'my-id'}">${'my text'}</${MyAzalea}>`;
-    expect(template).to.be.instanceof(TemplateResult);
 
     const fixture = document.createElement('div');
     document.body.appendChild(fixture);

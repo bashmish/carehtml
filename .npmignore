@@ -1,6 +1,6 @@
 /.vscode/
+/benchmarks/
 /coverage/
-*.bench.js
 *.spec.js
 .browserslistrc
 .commitlintrc
@@ -10,7 +10,6 @@
 .lintstagedrc
 .prettierignore
 .prettierrc
-karma.bench.conf.js
 results.json
 wallaby.js
 web-test-runner.bs.config.mjs

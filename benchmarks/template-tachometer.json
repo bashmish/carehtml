@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Polymer/tachometer/v0.5.8/config.schema.json",
+  "sampleSize": 30,
+  "timeout": 0,
+  "benchmarks": [
+    {
+      "name": "direct",
+      "url": "benchmarks/index.html?direct",
+      "browser": "{{browser}}",
+      "measurement": [
+        {
+          "mode": "performance",
+          "entryName": "{{measurement}}"
+        }
+      ]
+    },
+    {
+      "name": "wrapped",
+      "url": "benchmarks/index.html?wrapped",
+      "browser": "{{browser}}",
+      "measurement": [
+        {
+          "mode": "performance",
+          "entryName": "{{measurement}}"
+        }
+      ]
+    },
+    {
+      "name": "wrapped with classes",
+      "url": "benchmarks/index.html?wrapped-with-classes",
+      "browser": "{{browser}}",
+      "measurement": [
+        {
+          "mode": "performance",
+          "entryName": "{{measurement}}"
+        }
+      ]
+    }
+  ]
+}
