@@ -1,3 +1,4 @@
+/.husky/
 /.vscode/
 /benchmarks/
 /coverage/
@@ -6,7 +7,6 @@
 .commitlintrc
 .editorconfig
 .eslintrc
-.huskyrc
 .lintstagedrc
 .prettierignore
 .prettierrc

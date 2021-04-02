@@ -1,15 +1,12 @@
 {
   "*": [
-    "eclint fix",
-    "git add"
+    "eclint fix"
   ],
   "*.js": [
     "eslint --fix",
-    "prettier --write",
-    "git add"
+    "prettier --write"
   ],
   "*.md": [
-    "prettier --write",
-    "git add"
+    "prettier --write"
   ]
 }
