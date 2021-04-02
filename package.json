@@ -35,7 +35,6 @@
     "webpack": "^4.41.2"
   },
   "scripts": {
-    "bench": "yarn bench:create && yarn bench:render && yarn bench:create-and-render && yarn bench:update",
     "bench:create": "yarn bench:create:chrome && yarn bench:create:firefox && yarn bench:create:safari",
     "bench:create:chrome": "yarn tachometer:generate-config -m=create -b=chrome-headless && yarn tachometer:run",
     "bench:create:firefox": "yarn tachometer:generate-config -m=create -b=firefox-headless && yarn tachometer:run",
