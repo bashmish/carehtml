@@ -4,35 +4,31 @@
   "timeout": 0,
   "benchmarks": [
     {
-      "name": "direct",
-      "url": "benchmarks/index.html?direct",
       "browser": "{{browser}}",
       "measurement": [
         {
           "mode": "performance",
           "entryName": "{{measurement}}"
         }
-      ]
-    },
-    {
-      "name": "wrapped",
-      "url": "benchmarks/index.html?wrapped",
-      "browser": "{{browser}}",
-      "measurement": [
-        {
-          "mode": "performance",
-          "entryName": "{{measurement}}"
+      ],
+      "packageVersions": {
+        "label": "lit-html-without-template-string-cache",
+        "dependencies": {
+          "lit-html": "2.0.0-pre.7"
         }
-      ]
-    },
-    {
-      "name": "wrapped with classes",
-      "url": "benchmarks/index.html?wrapped-with-classes",
-      "browser": "{{browser}}",
-      "measurement": [
+      },
+      "expand": [
         {
-          "mode": "performance",
-          "entryName": "{{measurement}}"
+          "name": "direct",
+          "url": "benchmarks/index.html?direct"
+        },
+        {
+          "name": "wrapped",
+          "url": "benchmarks/index.html?wrapped"
+        },
+        {
+          "name": "wrapped with classes",
+          "url": "benchmarks/index.html?wrapped-with-classes"
         }
       ]
     }
