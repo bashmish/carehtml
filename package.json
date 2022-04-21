@@ -7,7 +7,7 @@
   "repository": "github:bashmish/carehtml",
   "homepage": "https://github.com/bashmish/carehtml#readme",
   "main": "src/wrap.js",
-  "typings": "src/wrap.d.ts",
+  "types": "src/wrap.d.ts",
   "devDependencies": {
     "@bundled-es-modules/chai": "^4.2.2",
     "@commitlint/cli": "^12.1.1",
