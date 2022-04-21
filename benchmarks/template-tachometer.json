@@ -11,12 +11,6 @@
           "entryName": "{{measurement}}"
         }
       ],
-      "packageVersions": {
-        "label": "lit-html-without-template-string-cache",
-        "dependencies": {
-          "lit-html": "2.0.0-pre.7"
-        }
-      },
       "expand": [
         {
           "name": "direct",

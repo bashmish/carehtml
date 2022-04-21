@@ -52,22 +52,28 @@ export default function transform(strings, values) {
     return [strings];
   }
   const newStrings = [];
+  newStrings.raw = [];
   const result = [0]; // first index is reserved for strings
   let mergeWithLastString = false;
   values.forEach((value, index) => {
     const string = strings[index];
+    const stringRaw = strings.raw[index];
     if (value && value.prototype instanceof HTMLElement) {
       const tag = getClassUniqueTag(value);
       if (mergeWithLastString) {
         const lastString = newStrings[newStrings.length - 1];
+        const lastStringRaw = newStrings.raw[newStrings.raw.length - 1];
         newStrings[newStrings.length - 1] = `${lastString}${tag}${strings[index + 1]}`;
+        newStrings.raw[newStrings.raw.length - 1] = String.raw`${lastStringRaw}${tag}${strings.raw[index + 1]}`;
       } else {
         newStrings.push(`${string}${tag}${strings[index + 1]}`);
+        newStrings.raw.push(String.raw`${stringRaw}${tag}${strings.raw[index + 1]}`);
       }
       mergeWithLastString = true;
     } else {
       if (!mergeWithLastString) {
         newStrings.push(string);
+        newStrings.raw.push(stringRaw);
       }
       result.push(value);
       mergeWithLastString = false;
@@ -75,6 +81,7 @@ export default function transform(strings, values) {
   });
   if (!mergeWithLastString) {
     newStrings.push(strings[strings.length - 1]);
+    newStrings.raw.push(strings.raw[strings.raw.length - 1]);
   }
 
   const cacheKey = newStrings.join(CACHE_SEPARATOR);

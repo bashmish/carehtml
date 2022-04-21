@@ -2,13 +2,18 @@ import { expect } from '@bundled-es-modules/chai';
 import transform from './transform.js';
 
 const testhtml = (strings, ...values) => [strings, values];
-const getNameForCEClass = (klass) => transform(['', ''], [klass])[0][0];
+const getNameForCEClass = (klass) => {
+  const strings = ['', ''];
+  strings.raw = ['', ''];
+  return transform(strings, [klass])[0][0];
+};
 
 describe('transform', () => {
   it('registers names for Custom Element classes in values and concatenates strings with those names', () => {
     class MyTulip extends HTMLElement {}
     const [strings, ...values] = transform(...testhtml`<${MyTulip} id="${'my-id'}">${'my text'}</${MyTulip}>`);
     expect(strings).to.deep.equal(['<my-tulip id="', '">', '</my-tulip>']);
+    expect(strings.raw).to.deep.equal(['<my-tulip id="', '">', '</my-tulip>']);
     expect(values).to.deep.equal(['my-id', 'my text']);
     expect(customElements.get('my-tulip')).to.equal(MyTulip);
   });
@@ -26,6 +31,7 @@ describe('transform', () => {
       class MyViolet extends HTMLElement {}
       const [strings, ...values] = transform(...testhtml`<${MyViolet}></${MyViolet}>`);
       expect(strings).to.deep.equal(['<my-violet></my-violet>']);
+      expect(strings.raw).to.deep.equal(['<my-violet></my-violet>']);
       expect(values).to.deep.equal([]);
       expect(customElements.get('my-violet')).to.equal(MyViolet);
     });
@@ -34,10 +40,12 @@ describe('transform', () => {
       class MyDaisy extends HTMLElement {}
       const [strings, ...values] = transform(...testhtml`<${MyDaisy}>${'my text'}</${MyDaisy}>`);
       expect(strings).to.deep.equal(['<my-daisy>', '</my-daisy>']);
+      expect(strings.raw).to.deep.equal(['<my-daisy>', '</my-daisy>']);
       expect(values).to.deep.equal(['my text']);
       expect(customElements.get('my-daisy')).to.equal(MyDaisy);
       const [strings2, ...values2] = transform(...testhtml`<${MyDaisy}>my text</${MyDaisy}>`);
       expect(strings2).to.deep.equal(['<my-daisy>my text</my-daisy>']);
+      expect(strings2.raw).to.deep.equal(['<my-daisy>my text</my-daisy>']);
       expect(values2).to.deep.equal([]);
     });
 
@@ -45,10 +53,12 @@ describe('transform', () => {
       class MySunflower extends HTMLElement {}
       const [strings, ...values] = transform(...testhtml`<${MySunflower} id="${'my-id'}"></${MySunflower}>`);
       expect(strings).to.deep.equal(['<my-sunflower id="', '"></my-sunflower>']);
+      expect(strings.raw).to.deep.equal(['<my-sunflower id="', '"></my-sunflower>']);
       expect(values).to.deep.equal(['my-id']);
       expect(customElements.get('my-sunflower')).to.equal(MySunflower);
       const [strings2, ...values2] = transform(...testhtml`<${MySunflower} id="my-id"></${MySunflower}>`);
       expect(strings2).to.deep.equal(['<my-sunflower id="my-id"></my-sunflower>']);
+      expect(strings2.raw).to.deep.equal(['<my-sunflower id="my-id"></my-sunflower>']);
       expect(values2).to.deep.equal([]);
     });
 
@@ -56,6 +66,7 @@ describe('transform', () => {
       class MyRose extends HTMLElement {}
       const [strings, ...values] = transform(...testhtml`<my-rose></my-rose>`);
       expect(strings).to.deep.equal(['<my-rose></my-rose>']);
+      expect(strings.raw).to.deep.equal(['<my-rose></my-rose>']);
       expect(values).to.deep.equal([]);
       expect(customElements.get('my-rose')).to.not.equal(MyRose);
     });
@@ -64,10 +75,12 @@ describe('transform', () => {
       class MyMagnolia {}
       const [strings, ...values] = transform(...testhtml`<${MyMagnolia}></${MyMagnolia}>`);
       expect(strings).to.deep.equal(['<', '></', '>']);
+      expect(strings.raw).to.deep.equal(['<', '></', '>']);
       expect(values).to.deep.equal([MyMagnolia, MyMagnolia]);
       expect(customElements.get('my-magnolia')).to.not.exist;
       const [strings2, ...values2] = transform(...testhtml`<${MyMagnolia}/>`);
       expect(strings2).to.deep.equal(['<', '/>']);
+      expect(strings2.raw).to.deep.equal(['<', '/>']);
       expect(values2).to.deep.equal([MyMagnolia]);
     });
   });
