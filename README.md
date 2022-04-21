@@ -15,12 +15,12 @@ There are 2 main reasons Web Components need something like this:
 1. Lack of scoping when registering Custom Elements which creates issues in tests and makes it impossible to have 2 different components with the same name.
 2. Inability to have 2 different versions of the same Custom Element when refactoring from an old to a new version, especially when having nested node modules.
 
-## Usage with lit-html and LitElement
+## Usage with Lit
 
-You need to wrap the lit-html:
+You need to wrap the Lit `html` tag:
 
 ```js
-import { LitElement, html as litHtml } from '@polymer/lit-element';
+import { LitElement, html as litHtml } from 'lit';
 import takeCareOf from 'carehtml';
 
 const html = takeCareOf(litHtml);
@@ -38,8 +38,8 @@ class MySearchBar extends LitElement {
 }
 ```
 
-> Wrapping the lit-html function is extra work which might seem unnecessary in the user code, but that allows to decouple `carehtml` from `lit-html`, primarily in terms of npm dependencies.
-> This allows to use `carehtml` with any version of `lit-html` and develop `carehtml` with its independent release cycle.
+> Wrapping is extra work which might seem unnecessary in the user code, but that allows to decouple `carehtml` from `lit`, primarily in terms of npm dependencies.
+> This allows to use `carehtml` with any version of `lit` and develop `carehtml` with its independent release cycle.
 
 ## Usage with Other Templating Libraries Based on Tagged Templates
 
@@ -81,7 +81,7 @@ render(html`<${App} page="All" />`, document.body);
 ## Usage in Tests
 
 ```js
-import { html as litHtml, render } from 'lit-html';
+import { html as litHtml, render } from 'lit';
 import takeCareOf from 'carehtml';
 
 const html = takeCareOf(litHtml);
@@ -93,7 +93,7 @@ describe('MyMixin', () => {
     }
 
     // create fixture
-    // (html`` in this context returns a lit-html TemplateResult as if it was lit-html itself)
+    // (html`` in this context returns TemplateResult as if it was Lit itself)
     const element = fixture(html`<${MyElement}></${MyElement}>`);
 
     // test mixin/element behavior
@@ -124,20 +124,19 @@ You can play around with this by using `yarn bench:create-and-render:chrome` scr
 
 The only thing that makes sense to measure in this situation is the rerendering.
 The idea is to check if it does not rerender unnecessarily second time when the classes stay the same meaning that the actual template is also the same.
-That's what makes `lit-html` so fast after all and `carehml` should not break this essential optimisation.
+That's what makes Lit so fast after all and `carehml` should not break this essential optimisation.
 In such benchmarks the `<my-element></my-element>` should have an internal template which will take most of the time of each render, so that the rerendering (if it happens) is close to being 2 times slower due to that internal template being rendered again.
 The end setup has `MyElement` with a shadow root with 100000 divs containing some text.
 The script `yarn bench:create-and-render-twice` can be used to measure that.
-The goal is to have the same numbers when using `lit-html` directly or wrapped with `carehtml`.
-And it's important to measure this with `lit-html 2.x` which does not have a special template string cache originally introduced for legacy browsers where string template literals were buggy.
+The goal is to have the same numbers when using Lit `html` directly or wrapped with `carehtml`.
 
 These are the results for Chrome which clearly show no overhead on rerendering when wrapping with `carehtml`:
 
-| Benchmark            |            Avg time |                                vs direct |                               vs wrapped |                  vs wrapped with classes |
-| -------------------- | ------------------: | ---------------------------------------: | ---------------------------------------: | ---------------------------------------: |
-| direct               | 108.63ms - 112.34ms |                                        - | unsure<br>-1% - +3%<br>-1.57ms - +2.84ms | unsure<br>-2% - +2%<br>-2.42ms - +1.80ms |
-| wrapped              | 108.66ms - 111.05ms | unsure<br>-3% - +1%<br>-2.84ms - +1.57ms |                                        - | unsure<br>-2% - +1%<br>-2.51ms - +0.61ms |
-| wrapped with classes | 109.80ms - 111.80ms | unsure<br>-2% - +2%<br>-1.80ms - +2.42ms | unsure<br>-1% - +2%<br>-0.61ms - +2.51ms |                                        - |
+| Benchmark            |          Avg time |                                vs direct |                               vs wrapped |                  vs wrapped with classes |
+| -------------------- | ----------------: | ---------------------------------------: | ---------------------------------------: | ---------------------------------------: |
+| direct               | 52.30ms - 53.12ms |                                        - | unsure<br>-2% - +1%<br>-0.99ms - +0.44ms | unsure<br>-2% - +0%<br>-1.08ms - +0.04ms |
+| wrapped              | 52.40ms - 53.57ms | unsure<br>-1% - +2%<br>-0.44ms - +0.99ms |                                        - | unsure<br>-2% - +1%<br>-0.94ms - +0.46ms |
+| wrapped with classes | 52.85ms - 53.61ms | unsure<br>-0% - +2%<br>-0.04ms - +1.08ms | unsure<br>-1% - +2%<br>-0.46ms - +0.94ms |                                        - |
 
 Measurements in other browsers are similar.
 

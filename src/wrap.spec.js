@@ -1,3 +1,4 @@
+import '@ungap/global-this';
 import { expect } from '@bundled-es-modules/chai';
 import wrap from './wrap.js';
 
@@ -28,8 +29,8 @@ describe('wrap', () => {
     expect(calledArgs[0][0]).to.equal(calledArgs[1][0]);
   });
 
-  it('integrates with lit-html', async () => {
-    const { html: litHtml, render } = await import('lit-html');
+  it('integrates with lit', async () => {
+    const { html: litHtml, render } = await import('lit');
 
     const html = wrap(litHtml);
     class MyAzalea extends HTMLElement {}

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Polymer/tachometer/v0.5.8/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Polymer/tachometer/v0.5.10/config.schema.json",
   "sampleSize": 30,
   "timeout": 0,
   "benchmarks": [
@@ -11,12 +11,6 @@
           "entryName": "{{measurement}}"
         }
       ],
-      "packageVersions": {
-        "label": "lit-html-without-template-string-cache",
-        "dependencies": {
-          "lit-html": "2.0.0-pre.7"
-        }
-      },
       "expand": [
         {
           "name": "direct",
