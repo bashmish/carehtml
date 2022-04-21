@@ -1,3 +1,4 @@
+import '@ungap/global-this';
 import { expect } from '@bundled-es-modules/chai';
 import wrap from './wrap.js';
 
