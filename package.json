@@ -1,6 +1,6 @@
 {
   "name": "carehtml",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Templates with automatic registration of Custom Elements.",
   "license": "MIT",
   "author": "Mikhail Bashkirov <bashmish@gmail.com>",

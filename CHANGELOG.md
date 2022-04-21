@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/bashmish/carehtml/compare/v0.1.3...v0.1.4) (2022-04-21)
+
+
+### Features
+
+* support Lit 2.x ([c5f40b3](https://github.com/bashmish/carehtml/commit/c5f40b3))
+
+
+### Bug Fixes
+
+* define types in package.json correctly to be auto loaded ([dd96c9a](https://github.com/bashmish/carehtml/commit/dd96c9a))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/bashmish/carehtml/compare/v0.1.2...v0.1.3) (2021-04-01)
 
