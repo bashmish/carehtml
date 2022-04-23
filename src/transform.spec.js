@@ -92,6 +92,21 @@ describe('transform', () => {
       expect(customElements.get('my-crocus')).to.equal(MyCrocus);
     });
 
+    it('ignores certain characters to comply with Custom Elements name constraints', () => {
+      class _MyCampanula extends HTMLElement {}
+      expect(getNameForCEClass(_MyCampanula)).to.equal('my-campanula');
+      expect(customElements.get('my-campanula')).to.equal(_MyCampanula);
+      class $MyLathyrus extends HTMLElement {}
+      expect(getNameForCEClass($MyLathyrus)).to.equal('my-lathyrus');
+      expect(customElements.get('my-lathyrus')).to.equal($MyLathyrus);
+      class $1MyGrandiflora2 extends HTMLElement {}
+      expect(getNameForCEClass($1MyGrandiflora2)).to.equal('my-grandiflora2');
+      expect(customElements.get('my-grandiflora2')).to.equal($1MyGrandiflora2);
+      class _1My$Campanula_Lathyrus2Grandiflora3 extends HTMLElement {} // eslint-disable-line camelcase
+      expect(getNameForCEClass(_1My$Campanula_Lathyrus2Grandiflora3)).to.equal('my-campanula-lathyrus2-grandiflora3');
+      expect(customElements.get('my-campanula-lathyrus2-grandiflora3')).to.equal(_1My$Campanula_Lathyrus2Grandiflora3);
+    });
+
     it('does not register the same class twice', () => {
       class MyIris extends HTMLElement {}
       expect(getNameForCEClass(MyIris)).to.equal('my-iris');

@@ -15,6 +15,10 @@ function toDashCase(name) {
   return dashCaseLetters.join('');
 }
 
+function removeInvalidCharacters(name) {
+  return name.replace(/^[^a-z]+/, '').replace(/[^a-z0-9-]/g, '');
+}
+
 function incrementTagName(tag, counter, start = 1) {
   const newName = counter === start ? tag : `${tag}-${counter}`;
   const elementRegistered = !!customElements.get(newName);
@@ -32,7 +36,7 @@ function getClassUniqueTag(klass) {
   }
 
   if (Object.prototype.hasOwnProperty.call(klass, 'name') && klass.name) {
-    tag = toDashCase(klass.name);
+    tag = removeInvalidCharacters(toDashCase(klass.name));
     if (tag.indexOf('-') === -1) {
       tag = `c-${tag}`;
     }
