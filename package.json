@@ -9,9 +9,9 @@
   "main": "src/wrap.js",
   "types": "src/wrap.d.ts",
   "devDependencies": {
-    "@bundled-es-modules/chai": "^4.2.2",
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
+    "@esm-bundle/chai": "^4.3.4-fix.0",
     "@ungap/global-this": "^0.4.4",
     "@web/dev-server-legacy": "^1.0.0",
     "@web/test-runner": "^0.13.27",
