@@ -1,5 +1,5 @@
 import '@ungap/global-this';
-import { expect } from '@bundled-es-modules/chai';
+import { expect } from '@esm-bundle/chai';
 import wrap from './wrap.js';
 
 describe('wrap', () => {

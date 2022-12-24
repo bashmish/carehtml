@@ -1,4 +1,4 @@
-import { expect } from '@bundled-es-modules/chai';
+import { expect } from '@esm-bundle/chai';
 import transform from './transform.js';
 
 const testhtml = (strings, ...values) => [strings, values];
